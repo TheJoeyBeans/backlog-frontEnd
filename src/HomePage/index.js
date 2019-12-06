@@ -19,7 +19,7 @@ class HomePage extends Component {
 		this.setState({
 			foundGames: []
 		});
-		const searchUrl = `https://api.rawg.io/api/games?search=${query}&page_size=10`;
+		const searchUrl = `https://api.rawg.io/api/games?search=${query}&page_size=9`;
 		axios.get(searchUrl, {
 			headers: {
 				'Content-Type': 'application/json'

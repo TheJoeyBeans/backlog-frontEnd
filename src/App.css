@@ -24,3 +24,12 @@ body{
 	width: 500px;
 	padding: 5px 10px;
 }
+.gameCard{
+	margin: 15px 5px;
+	width: 288px;
+}
+
+.gameCardImage{
+	height: 180px;
+	width: 286px;
+}
