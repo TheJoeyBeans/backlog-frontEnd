@@ -21,7 +21,7 @@ class LoginPage extends Component {
 
 	handleSubmit = async (e) => {
 		e.preventDefault();
-		const loginUrl = `${process.env.REACT_APP_BACKEND_URL}/register/login`;
+		const loginUrl = `${process.env.REACT_APP_API_URL}/register/login`;
 		console.log(loginUrl, "This is the login URL"); 
 		const loginResponse = await fetch(loginUrl, {
 			method: 'POST',

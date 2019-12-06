@@ -22,7 +22,7 @@ class RegistrationPage extends Component {
 
 	handleSubmit = async (e) => {
 		e.preventDefault();
-		const registrationUrl = `${process.env.REACT_APP_BACKEND_URL}/register/`;
+		const registrationUrl = `${process.env.REACT_APP_API_URL}/register/`;
 		console.log(registrationUrl, "This is the registration URL"); 
 		const registerResponse = await fetch(registrationUrl, {
 			method: 'POST',
