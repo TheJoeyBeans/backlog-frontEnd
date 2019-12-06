@@ -8,7 +8,7 @@ function GameSearchResults(props){
 				<Card className="gameCard">
 					<Card.Img className="gameCardImage" variant='top' src={game.pic} />
 					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
-					<Button variant='primary'>Add To Backlog</Button>
+					<Button onClick={(e) => props.grabId(game.id)} variant='primary'>Add To Backlog</Button>
 				</Card>
 			</Col>
 		)

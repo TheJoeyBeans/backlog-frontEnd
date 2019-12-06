@@ -26,7 +26,7 @@ class SiteHeader extends Component{
 					<Form>
 						<FormControl onChange={this.handleChange} type="text" placeholder="Search" className='searchBar'/>
 					</Form>
-					<Button onClick={() => this.props.fetchResults(this.state.searchInput)}>Search</Button>
+					<Button id="searchButton" onClick={() => this.props.fetchResults(this.state.searchInput)}>Search</Button>
 				</Col>
 				<Col>
 					<NavDropdown title='Dropdown'id="basic-nav-dropdown" className='headerDropDown'>

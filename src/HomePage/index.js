@@ -9,7 +9,8 @@ class HomePage extends Component {
 		super();
 
 		this.state = {
-			foundGames: []
+			foundGames: [],
+			addToBacklog: ''
 		}
 	}
 	//When a user searchs for a game, 9 results are brought back to them. Title, picture, and id of the game are 
@@ -55,15 +56,27 @@ class HomePage extends Component {
 			foundGames: []
 		})
 	}
+	//Pulls game id from search results list to be used in a get request to RAWG api.
+	getGameIdAndSearch = (id) =>{
+		console.log(id, "Hey you got the game ID");
+		const searchUrl = `https://api.rawg.io/api/games/${id}`;
+		axios.get(searchUrl, {
+			headers: {
+				'Content-Type' : 'application/json'
+			}
+		}).then(response =>{
+			console.log(response.data, "Hey I'm the response to your dumb game")
+		})
+	}
 	render(){
 		return(
 			<div>
-				<SiteHeader search={this.handleQuery} fetchResults={this.fetchGameResults}/>
+				<SiteHeader fetchResults={this.fetchGameResults}/>
 				<Row>
 					<Col lg={2}>
 					</Col>
 					<Col md={8}>
-						<GameSearchResults gameResults={this.state.foundGames}/>
+						<GameSearchResults grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
 					</Col>
 					<Col lg={2}>
 					</Col>
