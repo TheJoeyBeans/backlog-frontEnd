@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
 body{
 	background-color: #d9d9d9;
 }
@@ -25,11 +27,19 @@ body{
 	padding: 5px 10px;
 }
 .gameCard{
+	background-color: #343A40;
+	color: #fff;
+	padding: 5px;
 	margin: 15px 5px;
-	width: 288px;
+	width: 285px;
 }
 
 .gameCardImage{
-	height: 180px;
-	width: 286px;
+	height: 170px;
+	width: 273px;
+}
+
+.gameCardTitle{
+	text-align: center;
+	font-family: 'Josefin Sans', sans-serif;
 }

@@ -7,7 +7,7 @@ function GameSearchResults(props){
 			<Col md={4}>
 				<Card className="gameCard">
 					<Card.Img className="gameCardImage" variant='top' src={game.pic} />
-					<Card.Title>{game.title}</Card.Title>
+					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
 					<Button variant='primary'>Add To Backlog</Button>
 				</Card>
 			</Col>
