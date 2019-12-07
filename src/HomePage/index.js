@@ -10,7 +10,8 @@ class HomePage extends Component {
 
 		this.state = {
 			foundGames: [],
-			addToBacklog: ''
+			addToBacklog: {},
+			sessId: sessionStorage.getItem('sessionUserId')
 		}
 	}
 	//When a user searchs for a game, 9 results are brought back to them. Title, picture, and id of the game are 
@@ -58,16 +59,35 @@ class HomePage extends Component {
 	}
 	//Pulls game id from search results list to be used in a get request to RAWG api.
 	getGameIdAndSearch = (id) =>{
-		console.log(id, "Hey you got the game ID");
-		const searchUrl = `https://api.rawg.io/api/games/${id}`;
-		axios.get(searchUrl, {
-			headers: {
-				'Content-Type' : 'application/json'
-			}
-		}).then(response =>{
-			console.log(response.data, "Hey I'm the response to your dumb game")
-		})
+		if(this.state.sessId === null){
+			alert('you need to be logged in to add a game to your backlog');
+		} else {
+			console.log(id, "Hey you got the game ID");
+			const searchUrl = `https://api.rawg.io/api/games/${id}`;
+			axios.get(searchUrl, {
+				headers: {
+					'Content-Type' : 'application/json'
+				}
+			}).then(response =>{
+				console.log(response.data, "Hey I'm the response to your dumb game");
+
+				this.setState({
+					addToBacklog:{
+						title: response.data.name,
+						image: response.data.background_image,
+						studio: response.data.developers[0].name,
+						playing: null,
+						recommended: null
+					}
+				})
+			})
+		}
 	}
+	//Will log user out of server, destory's their sessionId
+	handleLogout = (e) =>{
+		sessionStorage.clear();
+	}
+	//Will POST a game selected as a backlog title to the database. 
 	render(){
 		return(
 			<div>
@@ -76,7 +96,7 @@ class HomePage extends Component {
 					<Col lg={2}>
 					</Col>
 					<Col md={8}>
-						<GameSearchResults grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
+						<GameSearchResults session={this.state.sessId} grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
 					</Col>
 					<Col lg={2}>
 					</Col>

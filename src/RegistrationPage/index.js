@@ -36,6 +36,8 @@ class RegistrationPage extends Component {
 		const parsedResponse = await registerResponse.json();
 		console.log(parsedResponse, "this is your parsedResponse");
 		if (parsedResponse.status === 201){
+			// sessionStorage.clear();
+			// sessionStorage.setItem('sessionUserId', parsedResponse.data._id)
 			console.log('Sign up successful');
 			this.props.history.push('/');
 		} else {

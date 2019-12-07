@@ -35,6 +35,8 @@ class LoginPage extends Component {
 		const parsedResponse = await loginResponse.json();
 		console.log(parsedResponse, "this is your parsedResponse");
 		if (parsedResponse.status === 200){
+			sessionStorage.clear();
+			sessionStorage.setItem('sessionUserId', parsedResponse.data.id);
 			console.log('login successful');
 			this.props.history.push('/');
 		} else {
