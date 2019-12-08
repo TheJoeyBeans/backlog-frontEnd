@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, NavDropdown, Form, FormControl, Col, Button } from 'react-bootstrap';
+import { Navbar, Dropdown, Form, FormControl, Col, Button, DropdownButton } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class SiteHeader extends Component{
 	constructor(props){
@@ -29,11 +30,19 @@ class SiteHeader extends Component{
 					<Button id="searchButton" onClick={() => this.props.fetchResults(this.state.searchInput)}>Search</Button>
 				</Col>
 				<Col>
-					<NavDropdown title='Dropdown'id="basic-nav-dropdown" className='headerDropDown'>
-						<NavDropdown.Item>Profile</NavDropdown.Item>
-						<NavDropdown.Item>Backlog</NavDropdown.Item>
-						<NavDropdown.Item>Completed Games</NavDropdown.Item>
-					</NavDropdown>
+					{this.props.logged ? (
+						<DropdownButton title='Dropdown' className='headerDropDown'>
+							<Dropdown.Item>Profile</Dropdown.Item>
+							<Dropdown.Item>Backlog</Dropdown.Item>
+							<Dropdown.Item>Completed Games</Dropdown.Item>
+							<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
+						</DropdownButton>
+					) : (
+						<DropdownButton title='Dropdown' className='headerDropDown'>
+							<Dropdown.Item href='/registration'>Register New Account</Dropdown.Item>
+							<Dropdown.Item href='/login'>Login To Account</Dropdown.Item>
+						</DropdownButton>
+					)}
 				</Col>			
 			</Navbar>
 		)

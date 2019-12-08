@@ -36,12 +36,12 @@ class RegistrationPage extends Component {
 		const parsedResponse = await registerResponse.json();
 		console.log(parsedResponse, "this is your parsedResponse");
 		if (parsedResponse.status === 201){
-			// sessionStorage.clear();
-			// sessionStorage.setItem('sessionUserId', parsedResponse.data._id)
+			sessionStorage.clear();
+			sessionStorage.setItem('userIsLogged', true);
 			console.log('Sign up successful');
 			this.props.history.push('/');
-		} else {
-			console.log('did not register')
+		} else if(parsedResponse.code === 11000) {
+			console.log('A user with that email address already exists');
 		}
 		
 	}

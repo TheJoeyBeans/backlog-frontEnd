@@ -11,7 +11,7 @@ class HomePage extends Component {
 		this.state = {
 			foundGames: [],
 			addToBacklog: {},
-			sessId: sessionStorage.getItem('sessionUserId')
+			userLogged: sessionStorage.getItem('userIsLogged')
 		}
 	}
 	//When a user searchs for a game, 9 results are brought back to them. Title, picture, and id of the game are 
@@ -59,7 +59,7 @@ class HomePage extends Component {
 	}
 	//Pulls game id from search results list to be used in a get request to RAWG api.
 	getGameIdAndSearch = (id) =>{
-		if(this.state.sessId === null){
+		if(this.state.userLogged === null){
 			alert('you need to be logged in to add a game to your backlog');
 		} else {
 			console.log(id, "Hey you got the game ID");
@@ -86,17 +86,21 @@ class HomePage extends Component {
 	//Will log user out of server, destory's their sessionId
 	handleLogout = (e) =>{
 		sessionStorage.clear();
+		this.setState({
+			userLogged: null
+		})
+		this.props.history.push('/');
 	}
 	//Will POST a game selected as a backlog title to the database. 
 	render(){
 		return(
 			<div>
-				<SiteHeader fetchResults={this.fetchGameResults}/>
+				<SiteHeader logged={this.state.userLogged}  logout={this.handleLogout} fetchResults={this.fetchGameResults}/>
 				<Row>
 					<Col lg={2}>
 					</Col>
 					<Col md={8}>
-						<GameSearchResults session={this.state.sessId} grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
+						<GameSearchResults grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
 					</Col>
 					<Col lg={2}>
 					</Col>
