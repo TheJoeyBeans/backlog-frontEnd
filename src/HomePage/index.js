@@ -58,6 +58,7 @@ class HomePage extends Component {
 		})
 	}
 	//Pulls game id from search results list to be used in a get request to RAWG api.
+	//Runs the post request method at the end.
 	getGameIdAndSearch = (id) =>{
 		if(this.state.userLogged === null){
 			alert('you need to be logged in to add a game to your backlog');
@@ -80,8 +81,29 @@ class HomePage extends Component {
 						recommended: null
 					}
 				})
+				this.addGameToUserBacklog();
 			})
 		}
+	}
+	//Will take the addToBackLog game from state and post to to the database under the
+	//correct user. 
+	addGameToUserBacklog = async () => {
+		const addGameUrl = `${process.env.REACT_APP_API_URL}/game/`;
+		console.log(addGameUrl, "this is the gameURL");
+		const postResponse = await fetch(addGameUrl, {
+			method: 'POST',
+			body: JSON.stringify(this.state.addToBacklog),
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		console.log(postResponse, "this is the post response")
+		const parsedResponse = await postResponse.json();
+		console.log(parsedResponse, "this is the post game parsedResponse");
+		this.setState({
+			addToBacklog: {}
+		})
 	}
 	//Will log user out of server, destory's their sessionId
 	handleLogout = async (e) =>{
