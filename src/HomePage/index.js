@@ -78,6 +78,7 @@ class HomePage extends Component {
 						image: response.data.background_image,
 						studio: response.data.developers[0].name,
 						playing: null,
+						completed: null,
 						recommended: null
 					}
 				})
