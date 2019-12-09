@@ -84,12 +84,22 @@ class HomePage extends Component {
 		}
 	}
 	//Will log user out of server, destory's their sessionId
-	handleLogout = (e) =>{
-		sessionStorage.clear();
-		this.setState({
-			userLogged: null
-		})
-		this.props.history.push('/');
+	handleLogout = async (e) =>{
+		try{
+			const logout = await fetch(process.env.REACT_APP_API_URL + '/register/logout', {
+				credentials: 'include',
+				method: 'GET'
+			});
+			const parsedResponse = await logout
+			console.log(parsedResponse, "this is your logout response");
+			sessionStorage.clear();
+			this.setState({
+				userLogged: null
+			})
+			this.props.history.push('/');
+		} catch(err){
+			console.log(err);
+		}
 	}
 	//Will POST a game selected as a backlog title to the database. 
 	render(){
