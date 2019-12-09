@@ -7,7 +7,8 @@ class BacklogPage extends Component{
 
 		this.state={
 			backlogGames: [],
-			gameToUpdate:{}
+			gameToUpdate:{},
+			playingGames: []
 		}
 	}
 	componentDidMount(){
@@ -37,6 +38,7 @@ class BacklogPage extends Component{
 		const deleteGameParsed = await deleteGameResponse.json();
 		if (deleteGameParsed.status === 200){
 			this.setState({backlogGames: this.state.backlogGames.filter((game) => game._id !== id)})
+			this.setState({playingGames: this.state.playingGames.filter((game) => game._id !== id)})
 		} else {
 			console.log('did not delete');
 		}
@@ -58,6 +60,17 @@ class BacklogPage extends Component{
 			}
 		});
 		const updatedGameParsed = await updateGameResponse.json();
+		if (updatedGameParsed.status === 200){
+			this.setState({backlogGames: this.state.backlogGames.filter((gameItem) => gameItem._id !== game._id)});
+			this.setState(state =>{
+					const playingGames = state.playingGames.concat(
+						game
+					);
+					return{
+						playingGames
+					}
+				})
+		}
 		console.log(updateGameResponse, "this is the game you just updated");
 		this.setState({
 			gameToUpdate: {}
@@ -79,6 +92,18 @@ class BacklogPage extends Component{
 			)
 		}
 	});
+	const playingItemTemp = this.state.playingGames.map((game, i) =>{
+		return(
+			<Col md={4} key={i}>
+				<Card className="gameCard" >
+					<Card.Img className="gameCardImage" variant='top' src={game.image} />
+					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+					<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
+					<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
+				</Card>
+			</Col>
+		)
+	})
 	const playingItem = this.state.backlogGames.map((game, i) =>{
 		if(game.playing){
 			return(
@@ -113,6 +138,7 @@ class BacklogPage extends Component{
 			<h1>Playing:</h1>
 			<Row>
 				{ playingItem }
+				{ playingItemTemp }
 			</Row>
 			<h1>Backlog:</h1>
 			<Row>
