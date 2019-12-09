@@ -27,6 +27,19 @@ class BacklogPage extends Component{
 			console.log(err)
 		}
 	}
+	//Removes game from User backlog and from game database. 
+	deleteGame = async (id) =>{
+		const deleteGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${id}`,{
+			credentials: 'include',
+			method: 'DELETE'
+		});
+		const deleteGameParsed = await deleteGameResponse.json();
+		if (deleteGameParsed.status === 200){
+			this.setState({backlogGames: this.state.backlogGames.filter((game) => game._id !== id)})
+		} else {
+			console.log('did not delete');
+		}
+	}
 	render(){
 	const gameItem = this.state.backlogGames.map((game, i) =>{
 		return(
@@ -35,6 +48,7 @@ class BacklogPage extends Component{
 					<Card.Img className="gameCardImage" variant='top' src={game.image} />
 					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
 					<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
+					<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
 				</Card>
 			</Col>
 		)
