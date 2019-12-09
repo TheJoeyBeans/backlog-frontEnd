@@ -6,7 +6,8 @@ class BacklogPage extends Component{
 		super(props)
 
 		this.state={
-			backlogGames: []
+			backlogGames: [],
+			gameToUpdate:{}
 		}
 	}
 	componentDidMount(){
@@ -40,19 +41,58 @@ class BacklogPage extends Component{
 			console.log('did not delete');
 		}
 	}
+	//Sets the game to currently playing.
+	addToPlaying = async (game) =>{
+		console.log(game, "gameToUpdate")
+		await this.setState({
+			gameToUpdate: {
+				playing: true
+			}
+		})
+		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${game._id}`,{
+			credentials: 'include',
+			body: JSON.stringify(this.state.gameToUpdate),
+			method: 'PUT',
+			headers: {
+				'Content-Type' : 'application/json'
+			}
+		});
+		const updatedGameParsed = await updateGameResponse.json();
+		console.log(updateGameResponse, "this is the game you just updated");
+		this.setState({
+			gameToUpdate: {}
+		})
+	}
 	render(){
-	const gameItem = this.state.backlogGames.map((game, i) =>{
-		return(
-			<Col md={4} key={i}>
-				<Card className="gameCard" >
-					<Card.Img className="gameCardImage" variant='top' src={game.image} />
-					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
-					<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
-					<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
-				</Card>
-			</Col>
-		)
-	});		
+	const backlogItem = this.state.backlogGames.map((game, i) =>{
+		if(game.playing === null){
+			return(
+				<Col md={4} key={i}>
+					<Card className="gameCard" >
+						<Card.Img className="gameCardImage" variant='top' src={game.image} />
+						<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
+						<Button onClick={(e) => this.addToPlaying(game)}>Add To Playing</Button>
+						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
+					</Card>
+				</Col>
+			)
+		}
+	});
+	const playingItem = this.state.backlogGames.map((game, i) =>{
+		if(game.playing){
+			return(
+				<Col md={4} key={i}>
+					<Card className="gameCard" >
+						<Card.Img className="gameCardImage" variant='top' src={game.image} />
+						<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
+						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
+					</Card>
+				</Col>
+			)
+		}
+	})		
 	return (
 		<Container>
 			<Navbar sticky="top" variant="dark" bg='dark'>	
@@ -70,8 +110,13 @@ class BacklogPage extends Component{
 					</DropdownButton>
 				</Col>			
 			</Navbar>
+			<h1>Playing:</h1>
 			<Row>
-				{ gameItem } 
+				{ playingItem }
+			</Row>
+			<h1>Backlog:</h1>
+			<Row>
+				{ backlogItem } 
 			</Row>
 		</Container>
 	)
