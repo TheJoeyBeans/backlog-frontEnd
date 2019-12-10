@@ -76,9 +76,34 @@ class BacklogPage extends Component{
 			gameToUpdate: {}
 		})
 	}
+	addToCompleted = async (game) =>{
+		console.log(game, "gameToUpdate")
+		await this.setState({
+			gameToUpdate: {
+				playing: null,
+				completed: true
+			}
+		})
+		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${game._id}`,{
+			credentials: 'include',
+			body: JSON.stringify(this.state.gameToUpdate),
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const updatedGameParsed = await updateGameResponse.json();
+		if (updatedGameParsed.status === 200){
+			this.setState({playingGames: this.state.playingGames.filter((gameItem) => gameItem._id !== game._id)});
+		}
+		console.log(updateGameResponse, "this is the game you just updated");
+		this.setState({
+			gameToUpdate: {}
+		})
+	}
 	render(){
 	const backlogItem = this.state.backlogGames.map((game, i) =>{
-		if(game.playing === null){
+		if(game.playing === null && game.completed === null){
 			return(
 				<Col md={4} key={i}>
 					<Card className="gameCard" >
@@ -99,6 +124,7 @@ class BacklogPage extends Component{
 					<Card.Img className="gameCardImage" variant='top' src={game.image} />
 					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
 					<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
+					<Button onClick={(e) => this.addToCompleted(game)}>Completed Game</Button>
 					<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
 				</Card>
 			</Col>
@@ -112,6 +138,7 @@ class BacklogPage extends Component{
 						<Card.Img className="gameCardImage" variant='top' src={game.image} />
 						<Card.Title className="gameCardTitle">{game.title}</Card.Title>
 						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
+						<Button onClick={(e) => this.addToCompleted(game)}>Completed Game</Button>
 						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
 					</Card>
 				</Col>
@@ -119,7 +146,7 @@ class BacklogPage extends Component{
 		}
 	})		
 	return (
-		<Container>
+		<div>
 			<Navbar sticky="top" variant="dark" bg='dark'>	
 				<Col>
 					<Navbar.Brand href='/'>Backlog</Navbar.Brand>
@@ -129,22 +156,23 @@ class BacklogPage extends Component{
 				<Col>
 					<DropdownButton title='Dropdown' className='headerDropDown'>
 						<Dropdown.Item>Profile</Dropdown.Item>
-						<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
-						<Dropdown.Item>Completed Games</Dropdown.Item>
+						<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
 						<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 					</DropdownButton>
 				</Col>			
 			</Navbar>
-			<h1>Playing:</h1>
-			<Row>
-				{ playingItem }
-				{ playingItemTemp }
-			</Row>
-			<h1>Backlog:</h1>
-			<Row>
-				{ backlogItem } 
-			</Row>
-		</Container>
+			<Container>
+				<h1>Playing:</h1>
+				<Row>
+					{ playingItem }
+					{ playingItemTemp }
+				</Row>
+				<h1>Backlog:</h1>
+				<Row>
+					{ backlogItem } 
+				</Row>
+			</Container>
+		</div>
 	)
 }
 }

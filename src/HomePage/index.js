@@ -11,7 +11,8 @@ class HomePage extends Component {
 		this.state = {
 			foundGames: [],
 			addToBacklog: {},
-			userLogged: sessionStorage.getItem('userIsLogged')
+			userLogged: sessionStorage.getItem('userIsLogged'),
+			completedGames: []
 		}
 	}
 	//When a user searchs for a game, 9 results are brought back to them. Title, picture, and id of the game are 

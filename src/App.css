@@ -11,6 +11,7 @@ body{
 
 #searchButton{
 	float: right;
+	position: absolute;
 }
 .headerDropDown{
 	float: right;
