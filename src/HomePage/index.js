@@ -75,6 +75,7 @@ class HomePage extends Component {
 
 				this.setState({
 					addToBacklog:{
+						gameId: id,
 						title: response.data.name,
 						image: response.data.background_image,
 						studio: response.data.developers[0].name,
