@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class BacklogPage extends Component{
 	constructor(props){
@@ -108,7 +109,12 @@ class BacklogPage extends Component{
 				<Col md={4} key={i}>
 					<Card className="gameCard" >
 						<Card.Img className="gameCardImage" variant='top' src={game.image} />
-						<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+						<Card.Title className="gameCardTitle"><Link to={{
+						pathname: '/gameDisplay',
+						state:{
+							sentGame: game
+						}
+					}}>{game.title}</Link></Card.Title>
 						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
 						<Button onClick={(e) => this.addToPlaying(game)}>Add To Playing</Button>
 						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
@@ -122,7 +128,12 @@ class BacklogPage extends Component{
 			<Col md={4} key={i}>
 				<Card className="gameCard" >
 					<Card.Img className="gameCardImage" variant='top' src={game.image} />
-					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+					<Card.Title className="gameCardTitle"><Link to={{
+						pathname: '/gameDisplay',
+						state:{
+							sentGame: game
+						}
+					}}>{game.title}</Link></Card.Title>
 					<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
 					<Button onClick={(e) => this.addToCompleted(game)}>Completed Game</Button>
 					<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
@@ -136,7 +147,12 @@ class BacklogPage extends Component{
 				<Col md={4} key={i}>
 					<Card className="gameCard" >
 						<Card.Img className="gameCardImage" variant='top' src={game.image} />
-						<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+						<Card.Title className="gameCardTitle"><Link to={{
+						pathname: '/gameDisplay',
+						state:{
+							sentGame: game
+						}
+					}}>{game.title}</Link></Card.Title>
 						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
 						<Button onClick={(e) => this.addToCompleted(game)}>Completed Game</Button>
 						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>

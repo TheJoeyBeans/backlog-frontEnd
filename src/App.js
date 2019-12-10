@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HomePage from './HomePage';
 import BacklogPage from './BacklogPage';
 import CompletedGames from './CompletedGames';
+import GameShowPage from './GameShowPage';
 import RegistrationPage from './RegistrationPage';
 import LoginPage from './LoginPage';
 import { Route, Switch } from 'react-router-dom';
@@ -24,6 +25,7 @@ class App extends Component{
 	   		<Route exact path='/' component={ HomePage }/>
 	   		<Route exact path='/backlog' component={ BacklogPage }/>
 	   		<Route exact path='/completedGames' component= { CompletedGames }/>
+	   		<Route exact path='/gameDisplay' component= { GameShowPage }/>
 	   		<Route exact path='/registration' component={ RegistrationPage }/>
 	   		<Route exact path='/login' component={ LoginPage }/>
 	     </Switch>
