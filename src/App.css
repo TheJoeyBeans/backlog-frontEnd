@@ -52,3 +52,20 @@ body{
 .gameCardSubtitle{
 	text-align: center;
 }
+
+#gameShowPageTitle{
+	text-align: center;
+	margin: 5px 0;
+}
+
+#gameShowPageImage{
+	height: 250px;
+	width: 400px;
+}
+
+#gameShowPageBody{
+	margin-top: 15px;
+}
+
+
+
