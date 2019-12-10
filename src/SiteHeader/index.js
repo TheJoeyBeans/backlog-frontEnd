@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Dropdown, Form, FormControl, Col, Button, DropdownButton } from 'react-bootstrap';
+import { Navbar, Dropdown, Form, FormControl, Col, Row, Button, DropdownButton } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class SiteHeader extends Component{
@@ -34,7 +34,7 @@ class SiteHeader extends Component{
 						<DropdownButton title='Dropdown' className='headerDropDown'>
 							<Dropdown.Item>Profile</Dropdown.Item>
 							<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
-							<Dropdown.Item>Completed Games</Dropdown.Item>
+							<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
 							<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 						</DropdownButton>
 					) : (
