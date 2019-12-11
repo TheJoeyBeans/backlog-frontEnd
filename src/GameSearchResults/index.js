@@ -7,8 +7,17 @@ function GameSearchResults(props){
 	console.log(props.gameResults, "these are your game results")
 	console.log(props.userIsLogged, "User logged?")
 	const gameItem = props.gameResults.map((game, i) =>{
+		if(backlog.length === 0){
+			return(		
+				<Card key={i} className="gameCard" >
+					<Card.Img className="gameCardImage" variant='top' src={game.pic} />
+					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+					<Button className='gameCardButton' size='sm' onClick={(e) => props.grabId(game.id)} variant='primary'>Add To Backlog</Button>
+				</Card>	
+			)
+		} else {
 		const nonBacklogItem = backlog.map((gameItem, j) =>{
-			if(game.id != gameItem.gameId || props.userIsLogged === null){
+			if(props.userIsLogged === null || game.id != gameItem.gameId){
 		return(		
 			<Card key={j} className="gameCard" >
 				<Card.Img className="gameCardImage" variant='top' src={game.pic} />
@@ -31,6 +40,7 @@ function GameSearchResults(props){
 				{nonBacklogItem}
 			</div>
 		)
+	}
 	});
 	return (
 		<Container>

@@ -5,6 +5,10 @@ body{
 	background-color: #d9d9d9;
 }
 
+.gameShowPage{
+	background-color: #fff;
+}
+
 .searchBar{
 	position: relative;
 	margin: 0 auto;
@@ -54,6 +58,7 @@ body{
 	text-align: center;
 }
 
+
 #gameShowPageTitle{
 	text-align: center;
 	margin: 5px 0;
@@ -64,6 +69,7 @@ body{
 #gameShowPageImage{
 	height: 250px;
 	width: 400px;
+	margin: 5px
 }
 
 #gameShowPageDescription{
@@ -75,7 +81,7 @@ body{
 }
 
 #gameShowPageBody{
-	margin-top: 15px;
+	background-color: #d9d9d9;
 }
 
 

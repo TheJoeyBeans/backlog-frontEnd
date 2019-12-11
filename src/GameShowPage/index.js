@@ -53,7 +53,7 @@ class GameShowPage extends Component{
 
 	render(){
 		return(
-			<div>
+			<div className='gameShowPage'>
 				<Navbar sticky="top" variant="dark" bg='dark'>	
 					<Col>
 						<Navbar.Brand href='/'>Backlog</Navbar.Brand>
@@ -62,7 +62,6 @@ class GameShowPage extends Component{
 					</Col>
 					<Col>
 						<DropdownButton title='Dropdown' className='headerDropDown'>
-							<Dropdown.Item>Profile</Dropdown.Item>
 							<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
 							<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
 							<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
@@ -70,30 +69,29 @@ class GameShowPage extends Component{
 					</Col>			
 				</Navbar>
 				<Container>
-					<Row>
-						<Col>
-							<h1 id='gameShowPageTitle'>{this.state.gameTitle}</h1>	
-						</Col>
-					</Row>
 					<div id='gameShowPageBody'>
 					<Row>
-							<Col md={1}>
-
-							</Col>
-							<Col md={10}>
-								<div>
-									<img id='gameShowPageImage' src={this.state.image}/>
-								</div>
-								<div class="gameShowDescription">
-									{this.state.extended ? 
-										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription}</p><Button onClick={this.expandText}>Read Less...</Button></React.Fragment> 
-										: 
-										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription.substr(0, 450)}</p><Button onClick={this.expandText}>Read More...</Button></React.Fragment>
-									}
-								</div>
-							</Col>	
-							<Col md={1}>
-							</Col>
+						<Col md={1}>
+						</Col>
+						<Col md={10}>
+							<Row>
+								<Col>
+									<h1 id='gameShowPageTitle'>{this.state.gameTitle}</h1>	
+								</Col>
+							</Row>
+							<div>
+								<img id='gameShowPageImage' src={this.state.image}/>
+							</div>
+							<div class="gameShowDescription">
+								{this.state.extended ? 
+									<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription}</p><Button onClick={this.expandText}>Read Less...</Button></React.Fragment> 
+									: 
+									<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription.substr(0, 450)}</p><Button onClick={this.expandText}>Read More...</Button></React.Fragment>
+								}
+							</div>
+						</Col>	
+						<Col md={1}>
+						</Col>
 					</Row>
 					</div>
 				</Container>

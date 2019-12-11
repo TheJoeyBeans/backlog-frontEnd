@@ -54,6 +54,7 @@ class HomePage extends Component {
 			searchQuery: ''
 		})
 	}
+
 	//foundGames in the search bar will be cleared so that the user can search for another game without previous 
 	//data inhibiting their ability to do so. 
 	clearGameResults = () =>{

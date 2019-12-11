@@ -66,7 +66,6 @@ class CompletedGames extends Component{
 				</Col>
 				<Col>
 					<DropdownButton title='Dropdown' className='headerDropDown'>
-						<Dropdown.Item>Profile</Dropdown.Item>
 						<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
 						<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 					</DropdownButton>
