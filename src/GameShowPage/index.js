@@ -11,7 +11,11 @@ class GameShowPage extends Component{
 			publishers: [],
 			developers: [],
 			extended: false,
-			gameDescription: ''
+			gameDescription: '',
+			commentInput: '',
+			commentToAdd: {
+				comments: []
+			}
 		}
 	}
 
@@ -51,6 +55,45 @@ class GameShowPage extends Component{
 		}
 	}
 
+	handleChange = (e) => {
+		e.preventDefault();
+		this.setState({
+			[e.currentTarget.name]: e.currentTarget.value
+		})
+	}
+
+	addToComments = () =>{
+		this.setState(state =>{
+		const commentToAdd = state.commentToAdd.comments.concat(
+			this.state.commentInput
+		);
+		return{
+			commentToAdd
+		}
+	})
+	this.saveComment(this.props.location.state.sentGame)		
+	}
+
+	saveComment = async (game) =>{
+
+		const gameUniqueId = game._id
+		console.log(game, "this is the gameId fool")
+		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${gameUniqueId}`,{
+			credentials: 'include',
+			body: JSON.stringify(this.state.commentToAdd),
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const updatedGameParsed = await updateGameResponse.json();
+		if (updatedGameParsed.status === 200){
+			console.log(updateGameResponse, "seems to work")
+		}
+		this.setState({
+			commentInput: ''
+		})
+	}
 	render(){
 		return(
 			<div className='gameShowPage'>
@@ -96,9 +139,9 @@ class GameShowPage extends Component{
 								<h1>Comments</h1>
 								<Form>
 									<Form.Group>
-										<Form.Control type='text' placeholder='Log your experiences here...'/>
+										<Form.Control name='commentInput' onChange={this.handleChange} type='text' placeholder='Log your experiences here...'/>
 									</Form.Group>
-									<Button>Submit</Button>
+									<Button onClick={this.addToComments}>Submit</Button>
 								</Form>
 							</Col>
 							</Row>
