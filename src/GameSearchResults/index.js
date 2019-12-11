@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Row, Col, Container, Card, Button } from 'react-bootstrap';
 
 function GameSearchResults(props){
+	const backlog = props.backlog;
 	const gameItem = props.gameResults.map((game, i) =>{
 		return(
 			<Col md={4} key={i}>

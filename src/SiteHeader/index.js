@@ -17,6 +17,13 @@ class SiteHeader extends Component{
 		})
 	}
 
+	handleKeyPress = (e) =>{
+		if(e.key === 'Enter'){
+			e.preventDefault();
+			this.props.fetchResults(this.state.searchInput)
+		}
+	}
+	
 	render(){
 		return(
 			<Navbar sticky="top" variant="dark" bg='dark'>	
@@ -25,9 +32,8 @@ class SiteHeader extends Component{
 				</Col>
 				<Col>
 					<Form>
-						<FormControl onChange={this.handleChange} type="text" placeholder="Search" className='searchBar'/>
+						<FormControl onKeyPress={this.handleKeyPress} onChange={this.handleChange} type="text" placeholder="Search for some games..." className='searchBar'/>
 					</Form>
-					<Button id="searchButton" onClick={() => this.props.fetchResults(this.state.searchInput)}>Search</Button>
 				</Col>
 				<Col>
 					{this.props.logged ? (
@@ -48,5 +54,7 @@ class SiteHeader extends Component{
 		)
 	}
 }
+
+// <Button id="searchButton" onClick={() => }>Search</Button>
 
 export default SiteHeader;

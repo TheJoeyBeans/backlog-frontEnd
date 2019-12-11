@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SiteHeader from '../SiteHeader';
 import { Row, Col, Container } from 'react-bootstrap';
 import GameSearchResults from '../GameSearchResults';
+import MainPageBacklogList from '../MainPageBacklogList';
 import axios from 'axios';
 
 class HomePage extends Component {
@@ -12,7 +13,9 @@ class HomePage extends Component {
 			foundGames: [],
 			addToBacklog: {},
 			userLogged: sessionStorage.getItem('userIsLogged'),
-			completedGames: []
+			completedGames: [],
+			recentlyAdded: [],
+			backlogList: []
 		}
 	}
 	//When a user searchs for a game, 9 results are brought back to them. Title, picture, and id of the game are 
@@ -84,6 +87,14 @@ class HomePage extends Component {
 						recommended: null
 					}
 				})
+				this.setState(state =>{
+					const recentlyAdded = state.recentlyAdded.concat(
+						response.data.name
+					);
+					return{
+						recentlyAdded
+					}
+				});
 				this.addGameToUserBacklog();
 			})
 		}
@@ -119,12 +130,19 @@ class HomePage extends Component {
 			console.log(parsedResponse, "this is your logout response");
 			sessionStorage.clear();
 			this.setState({
-				userLogged: null
+				userLogged: null,
+				recentlyAdded: []
 			})
 			this.props.history.push('/');
 		} catch(err){
 			console.log(err);
 		}
+	}
+	getBacklog = (games) =>{
+		console.log(games, "check out your backlog bitch")
+		this.setState({
+			backlogList: games
+		})
 	}
 	//Will POST a game selected as a backlog title to the database. 
 	render(){
@@ -135,9 +153,10 @@ class HomePage extends Component {
 					<Col lg={2}>
 					</Col>
 					<Col md={8}>
-						<GameSearchResults grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
+						<GameSearchResults backlog={this.state.backlogList} grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
 					</Col>
 					<Col lg={2}>
+						{this.state.userLogged ? <MainPageBacklogList getBackLog={this.getBacklog} recentGames={this.state.recentlyAdded}/> : ''}
 					</Col>
 				</Row>
 			</div>

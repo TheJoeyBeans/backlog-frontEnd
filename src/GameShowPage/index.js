@@ -48,6 +48,7 @@ class GameShowPage extends Component{
 					<Col>
 						<DropdownButton title='Dropdown' className='headerDropDown'>
 							<Dropdown.Item>Profile</Dropdown.Item>
+							<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
 							<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
 							<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 						</DropdownButton>
@@ -67,8 +68,8 @@ class GameShowPage extends Component{
 								</div>
 							</Col>
 							<Col md={7}>
-								<div id='gameShowPageDescription'>
-									{this.state.gameDescription}
+								<div >
+									<p id='gameShowPageDescription'>{this.state.gameDescription}</p>
 								</div>
 							</Col>	
 					</Row>

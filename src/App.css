@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Play&display=swap');
 body{
 	background-color: #d9d9d9;
 }
@@ -56,11 +57,17 @@ body{
 #gameShowPageTitle{
 	text-align: center;
 	margin: 5px 0;
+	font-family: 'Play', sans-serif;
+	font-weight: bold;
 }
 
 #gameShowPageImage{
 	height: 250px;
 	width: 400px;
+}
+
+#gameShowPageDescription{
+	font-family: 'Tomorrow', sans-serif;
 }
 
 #gameShowPageBody{
