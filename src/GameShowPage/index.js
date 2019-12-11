@@ -13,9 +13,7 @@ class GameShowPage extends Component{
 			extended: false,
 			gameDescription: '',
 			commentInput: '',
-			commentToAdd: {
-				comments: []
-			}
+			comments: []
 		}
 	}
 
@@ -64,11 +62,11 @@ class GameShowPage extends Component{
 
 	addToComments = () =>{
 		this.setState(state =>{
-		const commentToAdd = state.commentToAdd.comments.concat(
+		const comments = state.comments.concat(
 			this.state.commentInput
 		);
 		return{
-			commentToAdd
+			comments
 		}
 	})
 	this.saveComment(this.props.location.state.sentGame)		
@@ -78,9 +76,9 @@ class GameShowPage extends Component{
 
 		const gameUniqueId = game._id
 		console.log(game, "this is the gameId fool")
-		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${gameUniqueId}`,{
+		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${gameUniqueId}/comment`,{
 			credentials: 'include',
-			body: JSON.stringify(this.state.commentToAdd),
+			body: JSON.stringify(this.state.comments),
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
