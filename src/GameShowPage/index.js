@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton, Form } from 'react-bootstrap';
 
 
 class GameShowPage extends Component{
@@ -79,16 +79,29 @@ class GameShowPage extends Component{
 									<h1 id='gameShowPageTitle'>{this.state.gameTitle}</h1>	
 								</Col>
 							</Row>
-							<div>
-								<img id='gameShowPageImage' src={this.state.image}/>
-							</div>
-							<div class="gameShowDescription">
-								{this.state.extended ? 
-									<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription}</p><Button onClick={this.expandText}>Read Less...</Button></React.Fragment> 
-									: 
-									<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription.substr(0, 450)}</p><Button onClick={this.expandText}>Read More...</Button></React.Fragment>
-								}
-							</div>
+							<Row>
+							<Col md={8}>
+								<div>
+									<img id='gameShowPageImage' src={this.state.image}/>
+								</div>
+								<div class="gameShowDescription">
+									{this.state.extended ? 
+										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription}</p><Button onClick={this.expandText}>Read Less...</Button></React.Fragment> 
+										: 
+										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription.substr(0, 450)}</p><Button onClick={this.expandText}>Read More...</Button></React.Fragment>
+									}
+								</div>
+							</Col>
+							<Col md={4}>
+								<h1>Comments</h1>
+								<Form>
+									<Form.Group>
+										<Form.Control type='text' placeholder='Log your experiences here...'/>
+									</Form.Group>
+									<Button>Submit</Button>
+								</Form>
+							</Col>
+							</Row>
 						</Col>	
 						<Col md={1}>
 						</Col>
