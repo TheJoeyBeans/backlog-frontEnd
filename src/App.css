@@ -70,6 +70,10 @@ body{
 	font-family: 'Tomorrow', sans-serif;
 }
 
+.gameShowDescription{
+	width: 400px;
+}
+
 #gameShowPageBody{
 	margin-top: 15px;
 }

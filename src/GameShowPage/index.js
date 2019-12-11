@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
 
+
 class GameShowPage extends Component{
 	constructor(props){
 		super(props)
 
 		this.state ={
 			publishers: [],
-			developers: []
+			developers: [],
+			extended: false,
+			gameDescription: ''
 		}
 	}
 
@@ -34,6 +37,18 @@ class GameShowPage extends Component{
 				ratings: response.data.ratings
 			})
 		})
+	}
+
+	expandText = (e) =>{
+		if(this.state.extended){
+			this.setState({
+				extended: false
+			})
+		} else {
+			this.setState({
+				extended: true
+			})
+		}
 	}
 
 	render(){
@@ -62,16 +77,23 @@ class GameShowPage extends Component{
 					</Row>
 					<div id='gameShowPageBody'>
 					<Row>
-							<Col>
+							<Col md={1}>
+
+							</Col>
+							<Col md={10}>
 								<div>
 									<img id='gameShowPageImage' src={this.state.image}/>
 								</div>
-							</Col>
-							<Col md={7}>
-								<div >
-									<p id='gameShowPageDescription'>{this.state.gameDescription}</p>
+								<div class="gameShowDescription">
+									{this.state.extended ? 
+										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription}</p><Button onClick={this.expandText}>Read Less...</Button></React.Fragment> 
+										: 
+										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription.substr(0, 450)}</p><Button onClick={this.expandText}>Read More...</Button></React.Fragment>
+									}
 								</div>
 							</Col>	
+							<Col md={1}>
+							</Col>
 					</Row>
 					</div>
 				</Container>
