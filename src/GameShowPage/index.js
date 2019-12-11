@@ -78,7 +78,7 @@ class GameShowPage extends Component{
 		console.log(game, "this is the gameId fool")
 		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${gameUniqueId}/comment`,{
 			credentials: 'include',
-			body: JSON.stringify(this.state.comments),
+			body: JSON.stringify({ comment: this.state.commentInput}),
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
