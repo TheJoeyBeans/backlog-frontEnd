@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+BackLog: Users can keep track of games they want to play: -Games that are already owned -Games that are not owned. -Games can be marked as currently playing -STRETCH GOAL: Steam API to notify user of sales when games they want to play but don’t own go on sale. Users can keep track of games they’ve completed: -Give final impressions -Recommendation: Yes or No
 
-## Available Scripts
+LIVE APP HOSTED AT: https://backlog-capstone.herokuapp.com/
 
-In the project directory, you can run:
 
-### `npm start`
+UserList: siteUsers: []
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Users: -E-mail/Password -backLogGames: [] -completedGames: [] -Recommended Games:[] -STRETCH GOAL: -Following: [] -Followers: []
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Games: -Title -Cover Art -Studio -Year -Platform -playing: boolean -final impression -recommended: boolean
 
-### `npm test`
+APIs: -Gamedata will be fetched by RAWG Video Games Database STRETCH GOAL: Steam API to ping sales(???) Checkout Docs
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+User Stories: -When not signed in everyone should be able to access search functionality. -signed in users will be able to search for games and click to add them to their: backlog or completed. -User backlog will be a list of titles. Game title, cover art, and platform will be visible for each title. Within the backlog list, users will be able to transfer titles to completed. Games can be marked as “Currently Playing” Users can mark games on their backlog as wish listed or already owned. Users can filter the list by wishlist or owned. [STRETCHGOAL: wishlisted games will be marked as “ON SALE” when on sale] -Completed list will show list of user’s completed games. Game title, cover art, platform, and recommended or not will be visible if the user has recommended or not recommended a title. Clicking on game will take user to a page which recommendation and final impression. -User will be able to delete items from all lists and edit final impressions/recommendation on played lists. [Stretch Goals] -Users will be able to look up other users and see their game lists. Users can follow other users and see what users are following them.
 
-### `npm run build`
+WIREFRAME ROUGH DRAFT: https://imgur.com/a/GiTTusv
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Technologies Used: 
+-React.js
+-Node.js
+-Express.js
+-Mongoose
+-MongoDB
+-React-Bootstrap
+-Heroku (For live deployment)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+For local development: 
+On Front-End run: 
+Npm install 
+Create a .env.development file and input REACT_APP_API_URL=http://localhost:8000 (This connects to your backend) 
+and Npm start to run a live version of your server 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+On back-end run:
+Npm install
+npm install mongoose may be necessary
+create a .env file and input 
+MONGODB_URI=mongodb://localhost/backlog
+PORT=8000
+SECRET_KEY=<Unique to you>
+This connects your backend to your database and front end.
+  
+UNSOLVED BUGS: 
+When "completing a game" in your backlog if a item will not be removed from display AFTER the first time you visit the backlog and add it there. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+No error message on login/ registration page when error. App won't crash but nothing happens..
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Even if a user has a game in their backlog they can still add it to their backlog.
