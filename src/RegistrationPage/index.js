@@ -50,7 +50,7 @@ class RegistrationPage extends Component {
 		return(
 			<div>
 				<Navbar sticky="top" variant="dark" bg='dark'>	
-					<Link to="/"><Navbar.Brand>Backlog</Navbar.Brand></Link>		
+					<Link to="/"><Navbar.Brand className='navBarTitle'>Backlog</Navbar.Brand></Link>		
 				</Navbar>
 				<Container className="registrationContainer">
 					<Form>
@@ -66,7 +66,10 @@ class RegistrationPage extends Component {
 							<Form.Label>Password</Form.Label>
 							<Form.Control name='password' onChange={this.handleChange}  type='password' placeholder='Password'/>
 						</Form.Group>
-						<Button onClick={this.handleSubmit}variant='primary' type='submit'>Submit</Button>
+						<div>
+							<Button onClick={this.handleSubmit}variant='primary' type='submit'>Submit</Button>
+							<p className='loginLink'>To Login Click <Link to='/login'>Here</Link></p>
+						</div>
 					</Form>
 				</Container>
 			</div>

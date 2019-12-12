@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Dropdown, Form, FormControl, Col, Row, Button, DropdownButton } from 'react-bootstrap';
+import { Navbar, Dropdown, Form, FormControl, Col, Row, Button, DropdownButton, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class SiteHeader extends Component{
@@ -28,7 +28,7 @@ class SiteHeader extends Component{
 		return(
 			<Navbar sticky="top" variant="dark" bg='dark'>	
 				<Col>
-					<Navbar.Brand>Backlog</Navbar.Brand>
+					<Navbar.Brand className='navBarTitle'>Backlog</Navbar.Brand>
 				</Col>
 				<Col>
 					<Form>
@@ -37,16 +37,20 @@ class SiteHeader extends Component{
 				</Col>
 				<Col>
 					{this.props.logged ? (
-						<DropdownButton title='Dropdown' className='headerDropDown'>
-							<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
-							<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
-							<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
-						</DropdownButton>
+						<ButtonToolbar className='headerDropDown'>
+							<DropdownButton drop={'left'} variant="primary" title={'Profile'} id={'dropdown-button-drop-down'} key={'left'} className='dropDownList'>
+								<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
+								<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
+								<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
+							</DropdownButton>
+						</ButtonToolbar>
 					) : (
-						<DropdownButton title='Dropdown' className='headerDropDown'>
-							<Dropdown.Item href='/registration'>Register New Account</Dropdown.Item>
-							<Dropdown.Item href='/login'>Login To Account</Dropdown.Item>
-						</DropdownButton>
+						<ButtonToolbar className='headerDropDown'>
+							<DropdownButton drop={'left'} variant="primary" title={'Sign In/Register'} id={'dropdown-button-drop-left'} key={'left'} className='dropDownList'>
+								<Dropdown.Item href='/registration'>Register New Account</Dropdown.Item>
+								<Dropdown.Item href='/login'>Login To Account</Dropdown.Item>
+							</DropdownButton>
+						</ButtonToolbar>
 					)}
 				</Col>			
 			</Navbar>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class BacklogPage extends Component{
@@ -116,8 +116,10 @@ class BacklogPage extends Component{
 						}
 					}}>{game.title}</Link></Card.Title>
 						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
-						<Button onClick={(e) => this.addToPlaying(game)}>Add To Playing</Button>
-						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
+						<div className='cardButtons'>
+							<Button className='cardButtonRight' size='sm' onClick={(e) => this.addToPlaying(game)}>Playing</Button>
+							<Button className='cardButtonLeft' size='sm' onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove</Button>
+						</div>
 					</Card>
 				</Col>
 			)
@@ -135,8 +137,10 @@ class BacklogPage extends Component{
 						}
 					}}>{game.title}</Link></Card.Title>
 					<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
-					<Button onClick={(e) => this.addToCompleted(game)}>Completed Game</Button>
-					<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
+					<div className='cardButtons'>
+						<Button className='cardButtonRight' size='sm' onClick={(e) => this.addToCompleted(game)}>Completed</Button>
+						<Button className='cardButtonLeft' size='sm' onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove</Button>
+					</div>
 				</Card>
 			</Col>
 		)
@@ -154,8 +158,10 @@ class BacklogPage extends Component{
 						}
 					}}>{game.title}</Link></Card.Title>
 						<Card.Subtitle className="gameCardSubtitle">{game.studio}</Card.Subtitle>
-						<Button onClick={(e) => this.addToCompleted(game)}>Completed Game</Button>
-						<Button onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove From Backlog</Button>
+						<div className='cardButtons'>
+							<Button className='cardButtonRight' size='sm' onClick={(e) => this.addToCompleted(game)}>Completed</Button>
+							<Button className='cardButtonLeft' size='sm' onClick={(e) => this.deleteGame(game._id)} variant='primary'>Remove</Button>
+						</div>
 					</Card>
 				</Col>
 			)
@@ -165,25 +171,27 @@ class BacklogPage extends Component{
 		<div>
 			<Navbar sticky="top" variant="dark" bg='dark'>	
 				<Col>
-					<Navbar.Brand href='/'>Backlog</Navbar.Brand>
+					<Navbar.Brand className='navBarTitle' href='/'>Backlog</Navbar.Brand>
 				</Col>
 				<Col>
 				</Col>
 				<Col>
-					<DropdownButton title='Dropdown' className='headerDropDown'>
+				<ButtonToolbar className='headerDropDown'>
+					<DropdownButton drop={'left'} variant="primary" title={'Profile'} id={'dropdown-button-drop-down'} key={'left'} className='dropDownList'>
 						<Dropdown.Item>Profile</Dropdown.Item>
-						<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
+						<Dropdown.Item href='/completedGames'>Completed</Dropdown.Item>
 						<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 					</DropdownButton>
+				</ButtonToolbar>
 				</Col>			
 			</Navbar>
 			<Container>
-				<h1>Playing:</h1>
+				<h1 className='backlogListTitle'>Playing:</h1>
 				<Row>
 					{ playingItem }
 					{ playingItemTemp }
 				</Row>
-				<h1>Backlog:</h1>
+				<h1 className='backlogListTitle'>Backlog:</h1>
 				<Row>
 					{ backlogItem } 
 				</Row>

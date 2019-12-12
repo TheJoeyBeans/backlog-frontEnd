@@ -38,13 +38,19 @@ class MainPageBacklogList extends Component{
 			)
 		})
 		const backlogItem = this.state.backlog.map((game, i) =>{
+			if(game.playing === true){
+			return(
+				<li key={i}><img className='backlogIcon' src='https://static.thenounproject.com/png/138425-200.png'/>{game.title}</li>
+			)
+		} else {
 			return(
 				<li key={i}>{game.title}</li>
 			)
+		}
 		})
 		return(
-			<div>
-				<h4>Currently in your backlog:</h4>
+			<div className='homeBackLogList'>
+				<h4>Your Current Backlog:</h4>
 				<ul>
 					{backlogItem}
 					{recentItem}

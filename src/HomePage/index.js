@@ -134,7 +134,7 @@ class HomePage extends Component {
 				userLogged: null,
 				recentlyAdded: []
 			})
-			this.props.history.push('/');
+			this.props.history.push('/login');
 		} catch(err){
 			console.log(err);
 		}
@@ -151,12 +151,12 @@ class HomePage extends Component {
 			<div>
 				<SiteHeader logged={this.state.userLogged}  logout={this.handleLogout} fetchResults={this.fetchGameResults}/>
 				<Row>
-					<Col lg={2}>
+					<Col lg={1}>
 					</Col>
 					<Col md={8}>
 						<GameSearchResults userIsLogged={this.state.userLogged} backlog={this.state.backlogList} grabId={this.getGameIdAndSearch} gameResults={this.state.foundGames}/>
 					</Col>
-					<Col lg={2}>
+					<Col lg={3}>
 						{this.state.userLogged ? <MainPageBacklogList getBackLog={this.getBacklog} recentGames={this.state.recentlyAdded}/> : ''}
 					</Col>
 				</Row>

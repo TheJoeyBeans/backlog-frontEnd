@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Play&display=swap');
+
 body{
 	background-color: #d9d9d9;
 }
 
-.gameShowPage{
-	background-color: #fff;
+.navBarTitle{
+	font-family: 'Play', sans-serif;
+	font-weight: bold;
+	font-size: 30px;
 }
 
 .searchBar{
@@ -18,8 +21,24 @@ body{
 	float: right;
 	position: absolute;
 }
+
 .headerDropDown{
 	float: right;
+}
+
+.homeBackLogList{
+	margin: 10px 10px;
+	list-style: none;
+	font-family: 'Play', sans-serif;
+}
+
+.homeBackLogList li {
+	list-style: none;
+	font-family: 'Tomorrow', sans-serif;
+}
+
+.backlogListTitle{
+	font-family: 'Play', sans-serif;
 }
 
 .gameListItem{
@@ -39,7 +58,7 @@ body{
 	background-color: #343A40;
 	color: #fff;
 	padding: 5px;
-	margin: 15px 5px;
+	margin: 15px 30px;
 	width: 285px;
 }
 
@@ -49,9 +68,21 @@ body{
 	padding: 0 0 10px 0;
 }
 
+.cardButtons{
+	margin: 5px;
+}
+.cardButtonLeft{
+	width: 47%;
+	float: left;
+}
+
+.cardButtonRight{
+	width: 47%;
+	float: right;
+}
 .gameCardTitle{
 	text-align: center;
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Play', sans-serif;	
 }
 
 .gameCardSubtitle{
@@ -85,4 +116,30 @@ body{
 }
 
 
+.showPageComments{
+	height: 400px;
+}
 
+.showPageComments h1{
+	text-align: center;
+	font-family: 'Play', sans-serif;
+}
+
+.showPageComments li{
+	list-style-type: square;
+	font-family: 'Tomorrow', sans-serif;
+	font-size: 15px;
+}
+
+.backlogIcon{
+	height: 25px;
+	width: 25px;
+}
+
+.titleRow{
+	margin: 10px
+}
+
+.loginLink{
+	text-align: center;
+}

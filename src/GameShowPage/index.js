@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton, Form } from 'react-bootstrap';
+import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton, Form, ButtonToolbar } from 'react-bootstrap';
 
 
 class GameShowPage extends Component{
@@ -131,16 +131,18 @@ class GameShowPage extends Component{
 			<div className='gameShowPage'>
 				<Navbar sticky="top" variant="dark" bg='dark'>	
 					<Col>
-						<Navbar.Brand href='/'>Backlog</Navbar.Brand>
+						<Navbar.Brand className='navBarTitle' href='/'>Backlog</Navbar.Brand>
 					</Col>
 					<Col>
 					</Col>
 					<Col>
-						<DropdownButton title='Dropdown' className='headerDropDown'>
+					<ButtonToolbar className='headerDropDown'>
+						<DropdownButton drop={'left'} variant="primary" title={'Profile'} id={'dropdown-button-drop-down'} key={'left'} className='dropDownList'>
 							<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
 							<Dropdown.Item href='/completedGames'>Completed Games</Dropdown.Item>
 							<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 						</DropdownButton>
+					</ButtonToolbar>
 					</Col>			
 				</Navbar>
 				<Container>
@@ -149,13 +151,13 @@ class GameShowPage extends Component{
 						<Col md={1}>
 						</Col>
 						<Col md={10}>
-							<Row>
+							<Row className='titleRow'>
 								<Col>
 									<h1 id='gameShowPageTitle'>{this.state.gameTitle}</h1>	
 								</Col>
 							</Row>
 							<Row>
-							<Col md={8}>
+							<Col md={6}>
 								<div>
 									<img id='gameShowPageImage' src={this.state.image}/>
 								</div>
@@ -167,15 +169,17 @@ class GameShowPage extends Component{
 									}
 								</div>
 							</Col>
-							<Col md={4}>
-								<h1>Comments</h1>
+							<Col md={6}>
+							<div class='showPageComments'>
+								<h1>Gameplay Notes</h1>
 								<ul>
 								{ currentComments }
 								{ newComments }
 								</ul>
+							</div>
 								<Form>
 									<Form.Group>
-										<Form.Control name='commentInput' onChange={this.handleChange} value={this.state.commentInput} type='text' placeholder='Log your experiences here...'/>
+										<Form.Control className='commentsForm' as='textarea' rows='3' name='commentInput' onChange={this.handleChange} value={this.state.commentInput} placeholder='Log your experiences here...'/>
 									</Form.Group>
 									<Button onClick={this.addToComments}>Submit</Button>
 								</Form>

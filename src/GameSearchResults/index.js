@@ -7,38 +7,20 @@ function GameSearchResults(props){
 	console.log(props.gameResults, "these are your game results")
 	console.log(props.userIsLogged, "User logged?")
 	const gameItem = props.gameResults.map((game, i) =>{
-		if(backlog.length === 0){
-			return(		
-				<Card key={i} className="gameCard" >
-					<Card.Img className="gameCardImage" variant='top' src={game.pic} />
-					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
-					<Button className='gameCardButton' size='sm' onClick={(e) => props.grabId(game.id)} variant='primary'>Add To Backlog</Button>
-				</Card>	
-			)
-		} else {
-		const nonBacklogItem = backlog.map((gameItem, j) =>{
-			if(props.userIsLogged === null || game.id != gameItem.gameId){
+		if(props.userIsLogged === null){
 		return(		
-			<Card key={j} className="gameCard" >
+			<Card key={i} className="gameCard" >
+				<Card.Img className="gameCardImage" variant='top' src={game.pic} />
+				<Card.Title className="gameCardTitle">{game.title}</Card.Title>
+			</Card>	
+		)
+	} else {
+		return(		
+			<Card key={i} className="gameCard" >
 				<Card.Img className="gameCardImage" variant='top' src={game.pic} />
 				<Card.Title className="gameCardTitle">{game.title}</Card.Title>
 				<Button onClick={(e) => props.grabId(game.id)} variant='primary'>Add To Backlog</Button>
 			</Card>	
-		)
-		} else {
-			return(
-				<Card key={j} className="gameCard" >
-					<Card.Img className="gameCardImage" variant='top' src={game.pic} />
-					<Card.Title className="gameCardTitle">{game.title}</Card.Title>
-					<h4>BACKLOGGED</h4>
-				</Card>
-			)
-		}			
-		})
-		return(
-			<div key={i}>
-				{nonBacklogItem}
-			</div>
 		)
 	}
 	});

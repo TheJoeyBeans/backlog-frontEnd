@@ -6,6 +6,7 @@ import GameShowPage from './GameShowPage';
 import RegistrationPage from './RegistrationPage';
 import LoginPage from './LoginPage';
 import { Route, Switch } from 'react-router-dom';
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 

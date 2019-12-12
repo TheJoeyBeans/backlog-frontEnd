@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Image, Row, Col, Container, Card, Button, Navbar, Dropdown, DropdownButton, ButtonToolbar } from 'react-bootstrap';
 
 class CompletedGames extends Component{
 	constructor(){
@@ -60,19 +60,21 @@ class CompletedGames extends Component{
 		<div>
 			<Navbar sticky="top" variant="dark" bg='dark'>	
 				<Col>
-					<Navbar.Brand href='/'>Backlog</Navbar.Brand>
+					<Navbar.Brand className='navBarTitle' href='/'>Backlog</Navbar.Brand>
 				</Col>
 				<Col>
 				</Col>
 				<Col>
-					<DropdownButton title='Dropdown' className='headerDropDown'>
+				<ButtonToolbar className='headerDropDown'>
+					<DropdownButton drop={'left'} variant="primary" title={'Profile'} id={'dropdown-button-drop-down'} key={'left'} className='dropDownList'>
 						<Dropdown.Item href='/backlog'>Backlog</Dropdown.Item>
 						<Dropdown.Item onClick={this.props.logout}>LogOut</Dropdown.Item>
 					</DropdownButton>
+				</ButtonToolbar>
 				</Col>			
 			</Navbar>
 			<Container>
-				<h1>Completed Games:</h1>
+				<h1 className='backlogListTitle'>Completed Games:</h1>
 				<Row>
 					{ completedGame }
 				</Row>
