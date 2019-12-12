@@ -13,12 +13,14 @@ class GameShowPage extends Component{
 			extended: false,
 			gameDescription: '',
 			commentInput: '',
-			comments: []
+			comments: [],
+			backlogGames: []
 		}
 	}
 
 	componentDidMount(){
 		this.getGameIdAndSearch(this.props.location.state.sentGame.gameId);
+		this.getUserBackLog();
 	}
 	
 	getGameIdAndSearch = (id) =>{
@@ -59,6 +61,20 @@ class GameShowPage extends Component{
 			[e.currentTarget.name]: e.currentTarget.value
 		})
 	}
+	getUserBackLog = async () =>{
+		try{
+			const games = await fetch(`${process.env.REACT_APP_API_URL}/game/`, {
+				credentials: 'include',
+				method: 'GET'
+			});
+			const parsedGames = await games.json();
+			this.setState({
+				backlogGames: parsedGames.backlogGames
+			})
+		} catch(err){
+			console.log(err)
+		}
+	}
 
 	addToComments = () =>{
 		this.setState(state =>{
@@ -73,7 +89,6 @@ class GameShowPage extends Component{
 	}
 
 	saveComment = async (game) =>{
-
 		const gameUniqueId = game._id
 		console.log(game, "this is the gameId fool")
 		const updateGameResponse = await fetch(`${process.env.REACT_APP_API_URL}/game/${gameUniqueId}/comment`,{
@@ -93,6 +108,25 @@ class GameShowPage extends Component{
 		})
 	}
 	render(){
+		const gameComments = [];
+		const makeComments = this.state.backlogGames.map((game, i)=>{
+			if(game.gameId === this.props.location.state.sentGame.gameId){
+				for(let j = 0; j < game.comments.length; j++){
+					console.log(j)
+					gameComments.push(game.comments[j])
+			}
+			} return gameComments
+		});
+		const currentComments = gameComments.map((comment, i) =>{
+			return(
+				<li key={i}>{comment}</li>
+			)
+		});
+		const newComments = this.state.comments.map((comment, i) =>{
+			return(
+				<li key={i}>{comment}</li>
+			)
+		})
 		return(
 			<div className='gameShowPage'>
 				<Navbar sticky="top" variant="dark" bg='dark'>	
@@ -125,7 +159,7 @@ class GameShowPage extends Component{
 								<div>
 									<img id='gameShowPageImage' src={this.state.image}/>
 								</div>
-								<div class="gameShowDescription">
+								<div className="gameShowDescription">
 									{this.state.extended ? 
 										<React.Fragment><p id='#gameShowPageDescription'>{this.state.gameDescription}</p><Button onClick={this.expandText}>Read Less...</Button></React.Fragment> 
 										: 
@@ -135,9 +169,13 @@ class GameShowPage extends Component{
 							</Col>
 							<Col md={4}>
 								<h1>Comments</h1>
+								<ul>
+								{ currentComments }
+								{ newComments }
+								</ul>
 								<Form>
 									<Form.Group>
-										<Form.Control name='commentInput' onChange={this.handleChange} type='text' placeholder='Log your experiences here...'/>
+										<Form.Control name='commentInput' onChange={this.handleChange} value={this.state.commentInput} type='text' placeholder='Log your experiences here...'/>
 									</Form.Group>
 									<Button onClick={this.addToComments}>Submit</Button>
 								</Form>
