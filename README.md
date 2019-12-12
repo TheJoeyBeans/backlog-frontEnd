@@ -46,3 +46,5 @@ When "completing a game" in your backlog if a item will not be removed from disp
 No error message on login/ registration page when error. App won't crash but nothing happens..
 
 Even if a user has a game in their backlog they can still add it to their backlog.
+
+Mobile styling NEEDS to be cleaned up for show page
